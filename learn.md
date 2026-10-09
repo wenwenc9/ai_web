@@ -1,8 +1,8 @@
 # 从 0 到 1：页面怎么连上 LangGraph Agent
 
-这份笔记只讲连接。安装和报错表在 [README.md](README.md)。读完应能讲清：CopilotKit、Runtime、AG-UI、Deep Agents 各是什么，`/ag-ui` 是什么地址，前端为什么选不中「船期专家」。
+这份笔记只讲连接。安装和报错表在 [README.md](README.md)。读完应能理解：CopilotKit、Runtime、AG-UI、Deep Agents 各是什么，`/ag-ui` 是什么地址，前端为什么选不中「船期专家」。
 
-## 开会时可以这样说
+## 整体架构
 
 我们用 Python 的 Deep Agents 做了一张图。这张图里有一个主 Agent，下面挂着船期、货踪、运价三个专家。三个专家不是三个网站，也不是前端下拉框里的三个选项。用户在页面上只连这一张图。
 
@@ -31,7 +31,7 @@
 
 ## 两个「Agent」不是同一层
 
-这里最容易讲乱。
+这里最容易混淆。
 
 **第一层：页面可选的连接名。** 写在 `runtime.js`：
 
@@ -99,7 +99,7 @@ Python 用 SSE 把 RUN_STARTED、文字、工具调用流回来
 
 这四个文件必须渲染在 `<CopilotKit>` 里面。`PageTools` 在 `App.jsx` 中已经放在里面。用户发消息时，这三个工具的名字和参数说明会跟消息一起走第 4 步，进入同一次 `POST /ag-ui`。`CopilotKitMiddleware()` 让主 Agent 能调用它们。Python 源码里没有 `def open_customer`。
 
-换一个业务系统时，那个系统自己写自己的 `useFrontendTool`。主 Agent 提示词不写死函数名，只要求：要改页面或解释屏幕时，必须调用这次请求里说明相符的前端工具。华运是 `C001` 写在 `pageTools.jsx` 的 `description` 里。
+换一个业务系统时，那个系统自己写自己的 `useFrontendTool`。主 Agent 提示词不写死函数名，只要求：要改页面或解释屏幕时，必须调用这次请求里说明相符的前端工具。
 
 官方字段说明见 <https://docs.copilotkit.ai/reference/v2/hooks/useFrontendTool>。本仓库 README 的「页面控制」一节按 1.77.1 列了每个字段。
 
@@ -115,7 +115,7 @@ Python 用 SSE 把 RUN_STARTED、文字、工具调用流回来
 
 先启动 `logistics_agent.py`，看到 `Uvicorn running on http://0.0.0.0:9001`，再在 `copilotkit-frontend` 执行 `npm run dev`。打开 `http://localhost:5177/`，发「你好」。有流式回复，就说明页面、Runtime、Python 三截都接上了。
 
-## 不要讲错的三句
+## 常见误解
 
 - 「前端有三个 Agent 要选。」没有。前端只选连接名 `default`。三个专家在一张图内部。
 - 「浏览器应该请求 `http://127.0.0.1:9001/ag-ui`。」不应该。浏览器请求 `/api/copilotkit`，由 Runtime 去请求那个地址。
