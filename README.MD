@@ -109,7 +109,7 @@ OPENAI_MODEL=
 - `copilotkit-frontend/package.json` 和 `copilotkit-frontend/package-lock.json`
 - `logistics_agent.py`、`runtime.js`、`vite.config.js`、`src/`、`skills/`
 
-## 3. 启动，并确认第一次成功
+## 3. 启动，并确认第一次成功 
 
 开两个终端，都先进入仓库。
 
