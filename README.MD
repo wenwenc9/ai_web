@@ -1,8 +1,8 @@
 # 物流助手学习仓库
 
-这份说明给第一次接触本仓库的同事。目标是：自己把环境装好，把页面上的一句话送到 Python 里的 Agent，再看懂这条链路为什么要拆成三截。
+这份说明给第一次接触本仓库的读者。目标是：自己把环境装好，把页面上的一句话送到 Python 里的 Agent，再看懂这条链路为什么要拆成三截。
 
-先看代码，再看学问。概念和绑定关系以 [learn.md](learn.md) 为准。不要从 `BASE.MD` 或 `base2.md` 学，那两份是旧笔记，端口和接法已经过时。
+先看代码，再看学问。概念和绑定关系以 [learn.md](learn.md) 为准。
 
 ## 你将得到什么
 
@@ -90,13 +90,11 @@ OPENAI_MODEL=
 
 `.env` 里如果还有数据库地址，当前这份 `logistics_agent.py` 不会读它。对话写在运行后生成的 `logistics_sessions.db`。
 
-不要把填了密钥的 `.env` 提交到 git，也不要贴到聊天里。每位同事用自己的 Key。
+不要把填了密钥的 `.env` 提交到 git，也不要贴到聊天里。每位使用者用自己的 Key。
 
-## 打包给同事时带什么
+## 哪些内容不进仓库
 
-不要把安装出来的依赖目录打进压缩包。那些文件又大，又和对方的系统绑在一起。对方按上面的 `uv sync` 和 `npm install` 自己生成。
-
-不要打进去：
+`.gitignore` 已经把这些目录和文件排除，它们不会出现在仓库里：
 
 - `node_modules`（在 `copilotkit-frontend` 里）
 - `.venv`
@@ -105,13 +103,11 @@ OPENAI_MODEL=
 - `logistics_sessions.db`（本机对话记录）
 - `copilotkit-frontend/dist`
 
-必须打进去，否则对方装出来的版本会对不上：
+克隆仓库后，在根目录 `uv sync`，再进入 `copilotkit-frontend` 执行 `npm install`，就会按锁文件把依赖装齐。下面这些文件必须保留在仓库里，否则锁文件对不上版本：
 
 - `pyproject.toml` 和 `uv.lock`
 - `copilotkit-frontend/package.json` 和 `copilotkit-frontend/package-lock.json`
 - `logistics_agent.py`、`runtime.js`、`vite.config.js`、`src/`、`skills/`
-
-对方解压后，在根目录 `uv sync`，再进入 `copilotkit-frontend` 执行 `npm install`。这两步会按锁文件把上面列出的包装齐。
 
 ## 3. 启动，并确认第一次成功
 
@@ -344,7 +340,7 @@ parameters: z.object({
 4. `description` 写清何时必须调用、参数怎么填。框架提示词不会出现你们的函数名。若模型只用文字说已经完成，把「必须调用、不能口头完成」写进这条工具的 `description`，不要去改 Python 里的客户编号。
 5. 刷新页面，发一句应该触发它的话。表格或按钮要先变，聊天里的数字再和返回值一致。
 
-验收本仓库：对弹窗说「打开华运，看近 30 天异常」。客户列表应选中华运，订单表只剩近 30 天，异常摘要出现 HY2402、HY2403。聊天里的票号必须和摘要一致。
+验证本仓库：对弹窗说「打开华运，看近 30 天异常」。客户列表应选中华运，订单表只剩近 30 天，异常摘要出现 HY2402、HY2403。聊天里的票号必须和摘要一致。
 
 ## 7. 后端代码按什么顺序读
 
