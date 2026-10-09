@@ -1,0 +1,218 @@
+:root {
+  color-scheme: light;
+  --text: #3d4c5c;
+  --text-h: #16324f;
+  --bg: #f3f5f8;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  min-height: 100%;
+}
+
+body {
+  background: #f3f5f8;
+  color: #1a1a1a;
+}
+
+#root {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  border: 0;
+  text-align: left;
+  display: block;
+  min-height: 100%;
+}
+
+.app-shell {
+  display: flex;
+  height: 100vh;
+  min-height: 0;
+}
+
+.app-main {
+  flex: 1;
+  min-width: 0;
+  overflow: auto;
+}
+
+.chat-dock {
+  position: relative;
+  width: var(--chat-width, 480px);
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: #fff;
+  border-left: 1px solid #d7dee6;
+}
+
+.chat-resizer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -3px;
+  width: 6px;
+  cursor: col-resize;
+  touch-action: none;
+  z-index: 2;
+}
+
+.chat-resizer:hover,
+.chat-resizer:active,
+.chat-resizer:focus-visible {
+  background: #8fb4d9;
+  outline: none;
+}
+
+.chat-header {
+  flex: none;
+  padding: 14px 16px;
+  background: #16324f;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.chat-body {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.chat-body [data-testid="copilot-chat"] {
+  height: 100%;
+}
+
+/* 表格默认撑满栏宽，中文又允许逐字断开，列会被挤成一字一行。单元格不换行，整张表横向滚动。 */
+.chat-body [data-streamdown="table"] {
+  width: max-content;
+  min-width: 100%;
+}
+
+.chat-body [data-streamdown="table-cell"],
+.chat-body [data-streamdown="table-header-cell"] {
+  white-space: nowrap;
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+/* 模板样式把所有 h1 设成 56px，会盖过聊天组件自己的字号。 */
+.chat-body h1,
+.chat-body h2 {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: 0;
+  line-height: 1.4;
+}
+
+.tool-trace {
+  margin: 8px 0;
+  padding: 8px 10px;
+  border: 1px solid #d7dee6;
+  border-radius: 8px;
+  background: #f7f9fb;
+  font-size: 13px;
+}
+
+.tool-trace summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.tool-trace p {
+  margin: 8px 0 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: #3d4c5c;
+}
+
+@media (max-width: 800px) {
+  .app-shell {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .chat-dock {
+    width: 100%;
+    height: 70vh;
+    border-left: 0;
+    border-top: 1px solid #d7dee6;
+  }
+
+  .chat-resizer {
+    display: none;
+  }
+}
+
+.page-title {
+  padding: 16px 16px 0;
+}
+
+.page-title h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 12px;
+  padding: 16px;
+}
+
+.orders {
+  grid-column: 1 / -1;
+}
+
+.panel {
+  background: #fff;
+  border: 1px solid #d7dee6;
+  border-radius: 8px;
+  padding: 12px 16px;
+  overflow: auto;
+}
+
+.panel h2 {
+  margin: 0 0 12px;
+  font-size: 16px;
+}
+
+.panel table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.panel th,
+.panel td {
+  text-align: left;
+  padding: 6px 8px;
+  border-bottom: 1px solid #e6ebf0;
+}
+
+.panel tr.selected {
+  background: #e7f1ff;
+}
+
+.panel tbody tr {
+  cursor: pointer;
+}
+
+.panel dl {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 6px 8px;
+  margin: 0;
+}
+
+.panel label {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 8px;
+}

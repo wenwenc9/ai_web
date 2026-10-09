@@ -1,0 +1,25 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# 环境与密钥（真实密钥只留在本地 .env，绝不提交）
+.env
+
+# 本地数据库与会话数据
+logistics_sessions.db
+logistics_sessions.db-shm
+logistics_sessions.db-wal
+
+# IDE
+.idea/
+workspace/
+
+# Node / 前端
+node_modules/
+copilotkit-frontend/dist/
+
+# 本地笔记
+base.md
+base2.md
+BASE.MD

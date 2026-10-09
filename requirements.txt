@@ -1,0 +1,17 @@
+--extra-index-url https://copilotkit.gateway.scarf.sh/simple/
+
+deepagents
+copilotkit
+langchain
+langchain-openai
+ag-ui-langgraph
+fastapi
+uvicorn
+python-dotenv
+langgraph-checkpoint-postgres
+psycopg[binary]
+psycopg-pool
+openpyxl
+langgraph
+langchain_core
+aiosqlite

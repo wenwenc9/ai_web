@@ -1,0 +1,31 @@
+{
+  "name": "sofreight-sea-freight-price",
+  "version": "0.5.3",
+  "description": "搜航运价查询与确认后实盘询盘（含港口码）",
+  "skill_type": "sof",
+  "category": "pricing",
+  "tags": [
+    "运价查询",
+    "询盘",
+    "海运费",
+    "整箱",
+    "船司运价",
+    "港口代码",
+    "UN/LOCODE"
+  ],
+  "keywords": [
+    "运价",
+    "询盘",
+    "实盘",
+    "海运费",
+    "整箱运价",
+    "港口",
+    "UN/LOCODE"
+  ],
+  "author": "sofreight.com",
+  "api_list": [
+    "/DPort/index",
+    "/SeaFclFreight/index",
+    "/AgentInquiryOrder/save"
+  ]
+}
